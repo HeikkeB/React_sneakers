@@ -1,5 +1,6 @@
 body {
   margin: 0;
+  padding: 0px 10px;
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -46,6 +47,11 @@ header {
     img {
       margin: 43px 16px 45px 45px;
     }
+    @media screen and (max-width: 590px) {
+      img {
+        margin-left: 25px;
+      }
+    }
   }
 
   .header__right {
@@ -64,10 +70,20 @@ header {
         line-height: 1.2;
         font-weight: 600;
       }
+
+      @media screen and (max-width: 590px) {
+        margin-right: 10px;
+      }
     }
 
     li:last-of-type {
       margin-right: 0px;
+    }
+  }
+
+  @media screen and (max-width: 590px) {
+    .header__right {
+      margin-right: 25px;
     }
   }
 }
@@ -77,7 +93,7 @@ header {
   padding: 40px 60px;
 
   h1 {
-    margin: 0;
+    margin: 0px 0px 40px;
     padding: 0;
     font-weight: 700;
     font-size: 32px;
@@ -85,6 +101,74 @@ header {
   }
 }
 
+.content__list {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fit, 210px);
+  justify-items: center;
+  justify-content: center;
+}
+
 .card {
-  border: 1px solid red;
+  background: #ffffff;
+  border: 1px solid #f3f3f3;
+  border-radius: 40px;
+  padding: 20px;
+  width: 170px;
+
+  .card__image {
+    margin: 0px 10px;
+  }
+
+  p {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.2;
+    width: 150px;
+    margin: 14px auto;
+    height: 51px;
+  }
+}
+
+.card__info {
+  display: flex;
+  justify-content: space-between;
+  width: 150px;
+  margin: 0px auto 14px;
+
+  h3 {
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: #bdbdbd;
+    padding: 0;
+    margin: 0;
+  }
+
+  span {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+}
+
+.button {
+  background: #ffffff;
+  border: 1px solid #f2f2f2;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 830px) {
+  h1 {
+    text-align: center;
+  }
+
+  .content__list {
+    column-gap: 55px;
+    row-gap: 40px;
+  }
 }
