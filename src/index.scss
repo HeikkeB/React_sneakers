@@ -240,7 +240,7 @@ header {
   display: flex;
   flex-direction: column;
   width: 325px;
-  max-height: 80vh;
+  height: 80vh;
   right: 0;
   opacity: 1;
   background: #ffffff;
@@ -278,12 +278,12 @@ header {
   &:hover {
     opacity: 1;
     color: #ffffff;
-    //border: none;
     background: #8fc251;
   }
 }
 
 .items {
+  flex: 1;
   margin-bottom: 60px;
   display: flex;
   flex-direction: column;
