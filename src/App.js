@@ -1,4 +1,4 @@
-import Card from './components/Card'
+import Card from './components/Card/Card'
 import Header from './components/Header'
 import Drawer from './components/Drawer'
 import cardArr from './utils/cardArr'
@@ -20,7 +20,13 @@ function App() {
 
         <div className="content__list">
           {cardArr.map((el) => (
-            <Card title={el.title} price={el.price} imageUrl={el.imageUrl} />
+            <Card
+              title={el.title}
+              price={el.price}
+              imageUrl={el.imageUrl}
+              onClickBtnAdd={() => console.log('Add Cart')}
+              onClickBtnFavorite={() => console.log('Add Favorite')}
+            />
           ))}
         </div>
       </div>
