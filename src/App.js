@@ -6,6 +6,7 @@ import Drawer from './components/Drawer'
 
 function App() {
   const [items, setItems] = React.useState([])
+  const [cartItems, setCartItems] = React.useState([])
   const [clickCart, setClickCart] = React.useState(false)
 
   React.useEffect(() => {
@@ -18,9 +19,15 @@ function App() {
       })
   }, [])
 
+  const addToCard = (item) => {
+    setCartItems((prev) => [...prev, item])
+  }
+
   return (
     <div className="wrapper">
-      {clickCart && <Drawer onClose={() => setClickCart(false)} />}
+      {clickCart && (
+        <Drawer items={cartItems} onClose={() => setClickCart(false)} />
+      )}
       <Header onClickCart={() => setClickCart(true)} />
 
       <div className="content">
@@ -34,7 +41,13 @@ function App() {
 
         <div className="content__list">
           {items.map((el) => (
-            <Card title={el.title} price={el.price} imageUrl={el.imageUrl} />
+            <Card
+              title={el.title}
+              price={el.price}
+              imageUrl={el.imageUrl}
+              handleFavorite={() => console.log('favorite')}
+              handleAdd={(item) => addToCard(item)}
+            />
           ))}
         </div>
       </div>

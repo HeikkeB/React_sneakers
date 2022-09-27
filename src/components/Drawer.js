@@ -1,53 +1,37 @@
-function Drawer(props) {
+function Drawer({ onClose, items = [] }) {
   return (
     <div className="drawer__overlay">
       <div className="drawer">
         <h2>
           Корзина{' '}
           <img
-            onClick={props.onClose}
+            onClick={onClose}
             className="btnRemove"
             src="/image/btn_remove.svg"
             alt="remove"
           />
         </h2>
         <div className="items">
-          <div className="cartItem">
-            <img
-              className="cartItem__image"
-              src="/image/sneakers/Nike Blazer Mid Suede.jpg"
-              alt="sneakers"
-              width={83}
-              height={70}
-            />
-            <div className="cartItem__info">
-              <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <h3>12 999 руб.</h3>
+          {items.map((el) => (
+            <div className="cartItem">
+              <img
+                className="cartItem__image"
+                src={el.imageUrl}
+                alt="sneakers"
+                width={83}
+                height={70}
+              />
+              <div className="cartItem__info">
+                <p>{el.title}</p>
+                <h3>{el.price} руб.</h3>
+              </div>
+              <img
+                className="btnRemove"
+                src="/image/btn_remove.svg"
+                alt="remove"
+              />
             </div>
-            <img
-              className="btnRemove"
-              src="/image/btn_remove.svg"
-              alt="remove"
-            />
-          </div>
-          <div className="cartItem">
-            <img
-              className="cartItem__image"
-              src="/image/sneakers/Nike Blazer Mid Suede.jpg"
-              alt="sneakers"
-              width={83}
-              height={70}
-            />
-            <div className="cartItem__info">
-              <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <h3>12 999 руб.</h3>
-            </div>
-            <img
-              className="btnRemove"
-              src="/image/btn_remove.svg"
-              alt="remove"
-            />
-          </div>
+          ))}
         </div>
         <ul className="priceList">
           <li className="priceList__string">

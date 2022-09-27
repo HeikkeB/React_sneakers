@@ -1,16 +1,18 @@
 import styles from './Card.module.scss'
 import React from 'react'
 
-function Card(props) {
+function Card({ handleAdd, handleFavorite, imageUrl, title, price }) {
   const [isAdded, setIsAdded] = React.useState(false)
 
   const handleBtnAdd = () => {
+    handleAdd({ imageUrl, title, price })
     setIsAdded(!isAdded)
   }
 
   const [isLiked, setIsLiked] = React.useState(false)
 
   const handleBtnLike = () => {
+    handleFavorite()
     setIsLiked(!isLiked)
   }
 
@@ -27,16 +29,16 @@ function Card(props) {
       </div>
       <img
         className={styles.card__image}
-        src={props.imageUrl}
+        src={imageUrl}
         alt=""
         width={133}
         height={112}
       />
-      <p>{props.title}</p>
+      <p>{title}</p>
       <div className={styles.card__info}>
         <div>
           <h3>Цена:</h3>
-          <span>{props.price} руб.</span>
+          <span>{price} руб.</span>
         </div>
 
         <img
