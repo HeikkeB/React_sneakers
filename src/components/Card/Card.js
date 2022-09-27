@@ -1,12 +1,25 @@
 import styles from './Card.module.scss'
+import React from 'react'
 
 function Card(props) {
+  const [isAdded, setIsAdded] = React.useState(false)
+
+  const handleBtnAdd = () => {
+    setIsAdded(!isAdded)
+  }
+
+  const [isLiked, setIsLiked] = React.useState(false)
+
+  const handleBtnLike = () => {
+    setIsLiked(!isLiked)
+  }
+
   return (
     <div className={styles.card}>
       <div className={styles.favorite}>
         <img
-          onClick={props.onClickBtnFavorite}
-          src="/image/heart_unliked.svg"
+          onClick={handleBtnLike}
+          src={isLiked ? '/image/heart_liked.svg' : '/image/heart_unliked.svg'}
           alt="unliked"
           //width={32}
           //height={32}
@@ -25,9 +38,15 @@ function Card(props) {
           <h3>Цена:</h3>
           <span>{props.price} руб.</span>
         </div>
-        <button className={styles.button} onClick={props.onClickBtnAdd}>
-          <img src="/image/plus.svg" alt="plus" width={11} height={11} />
-        </button>
+
+        <img
+          className={styles.button_plus}
+          onClick={handleBtnAdd}
+          src={isAdded ? '/image/btn_checked.svg' : '/image/plus.svg'}
+          alt="plus"
+          width={32}
+          height={32}
+        />
       </div>
     </div>
   )

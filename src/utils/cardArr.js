@@ -60,5 +60,6 @@ const cardArr = [
     imageUrl: '/image/sneakers/Nike Lebron XVIII Low.jpg',
   },
 ]
+console.log(JSON.stringify(cardArr))
 
 export default cardArr
