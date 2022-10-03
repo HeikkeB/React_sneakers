@@ -12,7 +12,20 @@ function Drawer({ onClose, onRemove, items = [] }) {
           />
         </h2>
 
-        <div className="cartEmpty"></div>
+        {/*<div className="cartEmpty">
+          <img
+            width={120}
+            height={120}
+            className="cartEmpty__img"
+            src="./image/empty_cart.png"
+            alt="empty cart"
+          />
+          <h2 className="cartEmpty_h2">Cart is empty</h2>
+          <p className="cartEmpty_p">
+            Add at least one product to place an order
+          </p>
+          <button className="green__btn empty_btn">Back to shopping</button>
+        </div>*/}
 
         <div className="items">
           {items.map((el, index) => (
