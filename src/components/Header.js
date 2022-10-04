@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 function Header(props) {
   return (
     <header>
@@ -14,10 +15,14 @@ function Header(props) {
           <span>1205 руб.</span>
         </li>
         <li>
-          <img width={18} height={18} src="image/heart.svg" alt="heart" />
+          <Link exact="true" to="/favorites">
+            <img width={18} height={18} src="image/heart.svg" alt="heart" />
+          </Link>
         </li>
         <li>
-          <img width={18} height={18} src="image/user.svg" alt="user" />
+          <Link exact="true" to="/">
+            <img width={18} height={18} src="image/user.svg" alt="user" />
+          </Link>
         </li>
       </ul>
     </header>

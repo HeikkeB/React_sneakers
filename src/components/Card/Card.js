@@ -1,7 +1,15 @@
 import styles from './Card.module.scss'
 import React from 'react'
 
-function Card({ handleAdd, handleFavorite, imageUrl, title, price }) {
+function Card({
+  handleAdd,
+  handleFavorite,
+  imageUrl,
+  title,
+  price,
+  isFavorite = false,
+  isLikedCart = false,
+}) {
   const [isAdded, setIsAdded] = React.useState(false)
 
   const handleBtnAdd = () => {
@@ -9,7 +17,7 @@ function Card({ handleAdd, handleFavorite, imageUrl, title, price }) {
     setIsAdded(!isAdded)
   }
 
-  const [isLiked, setIsLiked] = React.useState(false)
+  const [isLiked, setIsLiked] = React.useState(isFavorite)
 
   const handleBtnLike = () => {
     handleFavorite({ imageUrl, title, price })

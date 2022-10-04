@@ -141,6 +141,14 @@ header {
   }
 }
 
+.content__list_favorites {
+  display: grid;
+  grid-gap: 40px;
+  grid-template-columns: repeat(auto-fit, 206px);
+  justify-items: center;
+  justify-content: start;
+}
+
 .content__list {
   display: grid;
   grid-gap: 40px;

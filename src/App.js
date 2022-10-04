@@ -1,8 +1,16 @@
 import React from 'react'
 import axios from 'axios'
-import Card from './components/Card/Card'
+import Home from './pages/Home'
 import Header from './components/Header'
 import Drawer from './components/Drawer'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Routes,
+} from 'react-router-dom'
+import Favorites from './pages/Favorites'
 //import cardArr from './utils/cardArr'
 
 function App() {
@@ -18,6 +26,13 @@ function App() {
       .then((res) => {
         setItems(res.data)
       })
+
+    axios
+      .get('https://63331bb1573c03ab0b58491b.mockapi.io/favorites')
+      .then((res) => {
+        setFavorite(res.data)
+      })
+
     axios
       .get('https://63331bb1573c03ab0b58491b.mockapi.io/cart')
       .then((res) => {
@@ -59,57 +74,33 @@ function App() {
       )}
       <Header onClickCart={() => setClickCart(true)} />
 
-      <div className="content">
-        <div className="titleSearch">
-          <h1>
-            {searchValue
-              ? `Поиск по запросу: "${searchValue}"`
-              : 'Все кроссовки'}
-          </h1>
-          <div className="search-block">
-            <img
-              className="search"
-              src="/image/search.svg"
-              alt="Search"
-              width={15}
-              height={15}
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Home
+              items={items}
+              searchValue={searchValue}
+              onChangeSearchInput={onChangeSearchInput}
+              onClearSearchInput={onClearSearchInput}
+              onAddFavorite={onAddFavorite}
+              addToCart={addToCart}
             />
-
-            <input
-              onChange={onChangeSearchInput}
-              placeholder="Search..."
-              value={searchValue}
-            ></input>
-            {searchValue && (
-              <img
-                onClick={onClearSearchInput}
-                className="clear"
-                src="/image/cross.svg"
-                alt="cross"
-                width={11}
-                height={11}
-              />
-            )}
-          </div>
-        </div>
-
-        <div className="content__list">
-          {items
-            .filter((el) =>
-              el.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((el) => (
-              <Card
-                key={el.title}
-                title={el.title}
-                price={el.price}
-                imageUrl={el.imageUrl}
-                handleFavorite={(item) => onAddFavorite(item)}
-                handleAdd={(item) => addToCart(item)}
-              />
-            ))}
-        </div>
-      </div>
+          }
+        ></Route>
+        <Route
+          exact
+          path="/favorites"
+          element={
+            <Favorites
+              items={favorite}
+              onAddFavorite={onAddFavorite}
+              addToCart={addToCart}
+            />
+          }
+        ></Route>
+      </Routes>
     </div>
   )
 }
