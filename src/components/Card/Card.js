@@ -12,7 +12,7 @@ function Card({ handleAdd, handleFavorite, imageUrl, title, price }) {
   const [isLiked, setIsLiked] = React.useState(false)
 
   const handleBtnLike = () => {
-    handleFavorite()
+    handleFavorite({ imageUrl, title, price })
     setIsLiked(!isLiked)
   }
 

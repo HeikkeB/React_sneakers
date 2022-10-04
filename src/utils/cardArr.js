@@ -61,5 +61,3 @@ const cardArr = [
   },
 ]
 console.log(JSON.stringify(cardArr))
-
-export default cardArr
