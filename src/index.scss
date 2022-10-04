@@ -94,6 +94,77 @@ header {
   }
 }
 
+.banner {
+  background: #f4efe9;
+  margin: 45px 60px 0px;
+  border-radius: 20px;
+  height: 300px;
+  display: flex;
+  justify-content: space-between;
+
+  .banner__logo {
+    margin: 16px 0px 0px 20px;
+  }
+
+  .banner__title {
+    padding: 0;
+    margin: 50px 0 0 60px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.4;
+    color: #8bb43c;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .banner__title {
+      font-size: 34px;
+      margin: 50px 0 0 22px;
+    }
+  }
+
+  @media screen and (max-width: 887px) {
+    .banner__title {
+      font-size: 25px;
+      margin: 50px 0 0 18px;
+    }
+  }
+
+  .banner__p {
+    margin: 0 0 0 60px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 1.4;
+  }
+
+  @media screen and (max-width: 1000px) {
+    .banner__p {
+      font-size: 34px;
+      margin: 0 0 0 22px;
+    }
+  }
+
+  @media screen and (max-width: 887px) {
+    .banner__p {
+      font-size: 34px;
+      margin: 0 0 0 18px;
+    }
+  }
+}
+
+@media screen and (max-width: 1060px) {
+  .banner {
+    margin: 45px 10px 0px;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .banner {
+    display: none;
+  }
+}
+
 .content {
   margin: 0;
   padding: 40px 60px;

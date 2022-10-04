@@ -58,9 +58,23 @@ function App() {
     setsearchValue('')
   }
 
-  const onAddFavorite = (item) => {
-    axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/favorites', item)
-    setFavorite((prev) => [...prev, item])
+  const onAddFavorite = async (item) => {
+    try {
+      if (favorite.find((favItem) => favItem.id === item.id)) {
+        axios.delete(
+          `https://63331bb1573c03ab0b58491b.mockapi.io/favorites/${item.id}`
+        )
+        setFavorite((prev) => prev.filter((favItem) => favItem.id !== item.id))
+      } else {
+        const { data } = await axios.post(
+          'https://63331bb1573c03ab0b58491b.mockapi.io/favorites',
+          item
+        )
+        setFavorite((prev) => [...prev, data])
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   return (

@@ -2,6 +2,7 @@ import styles from './Card.module.scss'
 import React from 'react'
 
 function Card({
+  id,
   handleAdd,
   handleFavorite,
   imageUrl,
@@ -20,7 +21,7 @@ function Card({
   const [isLiked, setIsLiked] = React.useState(isFavorite)
 
   const handleBtnLike = () => {
-    handleFavorite({ imageUrl, title, price })
+    handleFavorite({ imageUrl, title, price, id })
     setIsLiked(!isLiked)
   }
 

@@ -10,13 +10,14 @@ function Favorites({ items, onAddFavorite, addToCart }) {
       <div className="content__list_favorites">
         {items.map((el) => (
           <Card
-            key={el.title}
-            title={el.title}
-            price={el.price}
-            imageUrl={el.imageUrl}
+            key={el.id}
             handleFavorite={(item) => onAddFavorite(item)}
             handleAdd={(item) => addToCart(item)}
             isFavorite={true}
+            {...el}
+            //title={el.title}
+            //price={el.price}
+            //imageUrl={el.imageUrl}
           />
         ))}
       </div>
