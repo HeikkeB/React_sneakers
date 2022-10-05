@@ -30,10 +30,10 @@ function Card({
       <div className={styles.favorite}>
         <img
           onClick={handleBtnLike}
-          src={isLiked ? '/image/heart_liked.svg' : '/image/heart_unliked.svg'}
+          src={isLiked ? '/image/heart_liked.png' : '/image/heart_unliked.png'}
           alt="unliked"
-          //width={32}
-          //height={32}
+          width={32}
+          height={32}
         />
       </div>
       <img
