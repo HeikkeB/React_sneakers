@@ -8,7 +8,30 @@ function Home({
   onAddFavorite,
   addToCart,
   cartItems,
+  isLoading,
 }) {
+  const renderItems = () => {
+    const itemsRender = items.filter((el) =>
+      el.title.toLowerCase().includes(searchValue.toLowerCase())
+    )
+    return (
+      isLoading ? Array(12).fill(<Card loading={isLoading} />) : itemsRender
+    ).map((el) => (
+      <Card
+        key={el.title}
+        title={el.title}
+        price={el.price}
+        imageUrl={el.imageUrl}
+        handleFavorite={(item) => onAddFavorite(item)}
+        handleAdd={(item) => addToCart(item)}
+        isLikedCart={cartItems.some(
+          (item) => Number(item.id) === Number(el.id)
+        )}
+        loading={isLoading}
+      />
+    ))
+  }
+
   return (
     <>
       <div className="banner">
@@ -65,25 +88,7 @@ function Home({
           </div>
         </div>
 
-        <div className="content__list">
-          {items
-            .filter((el) =>
-              el.title.toLowerCase().includes(searchValue.toLowerCase())
-            )
-            .map((el) => (
-              <Card
-                key={el.title}
-                title={el.title}
-                price={el.price}
-                imageUrl={el.imageUrl}
-                handleFavorite={(item) => onAddFavorite(item)}
-                handleAdd={(item) => addToCart(item)}
-                isLikedCart={cartItems.some(
-                  (item) => Number(item.id) === Number(el.id)
-                )}
-              />
-            ))}
-        </div>
+        <div className="content__list">{renderItems()}</div>
       </div>
     </>
   )
