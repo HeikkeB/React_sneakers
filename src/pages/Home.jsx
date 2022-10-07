@@ -1,15 +1,17 @@
 import Card from '../components/Card/Card'
+import React from 'react'
+import configContext from '../utils/context'
 
 function Home({
-  items,
   searchValue,
   onChangeSearchInput,
   onClearSearchInput,
   onAddFavorite,
   addToCart,
-  cartItems,
   isLoading,
 }) {
+  const { items, cartItems } = React.useContext(configContext)
+
   const renderItems = () => {
     const itemsRender = items.filter((el) =>
       el.title.toLowerCase().includes(searchValue.toLowerCase())

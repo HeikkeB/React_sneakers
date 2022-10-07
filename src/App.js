@@ -3,14 +3,9 @@ import axios from 'axios'
 import Home from './pages/Home'
 import Header from './components/Header'
 import Drawer from './components/Drawer'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  Routes,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Favorites from './pages/Favorites'
+import configContext from './utils/context'
 //import cardArr from './utils/cardArr'
 
 function App() {
@@ -97,46 +92,42 @@ function App() {
   }
 
   return (
-    <div className="wrapper">
-      {clickCart && (
-        <Drawer
-          items={cartItems}
-          onClose={() => setClickCart(false)}
-          onRemove={removeToCartItem}
-        />
-      )}
-      <Header onClickCart={() => setClickCart(true)} />
+    <configContext.Provider value={{ items, cartItems, favorite }}>
+      <div className="wrapper">
+        {clickCart && (
+          <Drawer
+            items={cartItems}
+            onClose={() => setClickCart(false)}
+            onRemove={removeToCartItem}
+          />
+        )}
+        <Header onClickCart={() => setClickCart(true)} />
 
-      <Routes>
-        <Route
-          exact
-          path="/"
-          element={
-            <Home
-              cartItems={cartItems}
-              items={items}
-              searchValue={searchValue}
-              onChangeSearchInput={onChangeSearchInput}
-              onClearSearchInput={onClearSearchInput}
-              onAddFavorite={onAddFavorite}
-              addToCart={addToCart}
-              isLoading={isLoading}
-            />
-          }
-        ></Route>
-        <Route
-          exact
-          path="/favorites"
-          element={
-            <Favorites
-              items={favorite}
-              onAddFavorite={onAddFavorite}
-              addToCart={addToCart}
-            />
-          }
-        ></Route>
-      </Routes>
-    </div>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={
+              <Home
+                searchValue={searchValue}
+                onChangeSearchInput={onChangeSearchInput}
+                onClearSearchInput={onClearSearchInput}
+                onAddFavorite={onAddFavorite}
+                addToCart={addToCart}
+                isLoading={isLoading}
+              />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/favorites"
+            element={
+              <Favorites onAddFavorite={onAddFavorite} addToCart={addToCart} />
+            }
+          ></Route>
+        </Routes>
+      </div>
+    </configContext.Provider>
   )
 }
 

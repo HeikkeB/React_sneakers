@@ -1,6 +1,10 @@
+import React from 'react'
 import Card from '../components/Card/Card'
+import configContext from '../utils/context'
 
-function Favorites({ items, onAddFavorite, addToCart }) {
+function Favorites({ onAddFavorite, addToCart }) {
+  const { favorite } = React.useContext(configContext)
+
   return (
     <div className="content">
       <div className="titleSearch">
@@ -8,7 +12,7 @@ function Favorites({ items, onAddFavorite, addToCart }) {
       </div>
 
       <div className="content__list_favorites">
-        {items.map((el) => (
+        {favorite.map((el) => (
           <Card
             key={el.id}
             handleFavorite={(item) => onAddFavorite(item)}
