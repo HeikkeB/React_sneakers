@@ -21,28 +21,43 @@ function App() {
   const [clickCart, setClickCart] = React.useState(false)
 
   React.useEffect(() => {
-    axios
-      .get('https://63331bb1573c03ab0b58491b.mockapi.io/items')
-      .then((res) => {
-        setItems(res.data)
-      })
+    async function fetchData() {
+      const favoriteResponse = await axios.get(
+        'https://63331bb1573c03ab0b58491b.mockapi.io/favorites'
+      )
 
-    axios
-      .get('https://63331bb1573c03ab0b58491b.mockapi.io/favorites')
-      .then((res) => {
-        setFavorite(res.data)
-      })
+      const cartResponse = await axios.get(
+        'https://63331bb1573c03ab0b58491b.mockapi.io/cart'
+      )
 
-    axios
-      .get('https://63331bb1573c03ab0b58491b.mockapi.io/cart')
-      .then((res) => {
-        setCartItems(res.data)
-      })
+      const itemsResponse = await axios.get(
+        'https://63331bb1573c03ab0b58491b.mockapi.io/items'
+      )
+
+      setFavorite(favoriteResponse.data)
+      setCartItems(cartResponse.data)
+      setItems(itemsResponse.data)
+    }
+
+    fetchData()
   }, [])
 
-  const addToCart = (item) => {
-    axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/cart', item)
-    setCartItems((prev) => [...prev, item])
+  const addToCart = (obj) => {
+    try {
+      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+        axios.delete(
+          `https://63331bb1573c03ab0b58491b.mockapi.io/cart/${obj.id}`
+        )
+        setCartItems((prev) =>
+          prev.filter((item) => Number(item.id) !== Number(obj.id))
+        )
+      } else {
+        axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/cart', obj)
+        setCartItems((prev) => [...prev, obj])
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const removeToCartItem = (id) => {
@@ -94,6 +109,7 @@ function App() {
           path="/"
           element={
             <Home
+              cartItems={cartItems}
               items={items}
               searchValue={searchValue}
               onChangeSearchInput={onChangeSearchInput}

@@ -11,10 +11,10 @@ function Card({
   isFavorite = false,
   isLikedCart = false,
 }) {
-  const [isAdded, setIsAdded] = React.useState(false)
+  const [isAdded, setIsAdded] = React.useState(isLikedCart)
 
   const handleBtnAdd = () => {
-    handleAdd({ imageUrl, title, price })
+    handleAdd({ id, imageUrl, title, price })
     setIsAdded(!isAdded)
   }
 

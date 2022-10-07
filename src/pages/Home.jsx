@@ -7,6 +7,7 @@ function Home({
   onClearSearchInput,
   onAddFavorite,
   addToCart,
+  cartItems,
 }) {
   return (
     <>
@@ -77,7 +78,9 @@ function Home({
                 imageUrl={el.imageUrl}
                 handleFavorite={(item) => onAddFavorite(item)}
                 handleAdd={(item) => addToCart(item)}
-                //isLikedCart={true}
+                isLikedCart={cartItems.some(
+                  (item) => Number(item.id) === Number(el.id)
+                )}
               />
             ))}
         </div>
