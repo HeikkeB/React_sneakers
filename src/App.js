@@ -43,12 +43,12 @@ function App() {
 
   const addToCart = (obj) => {
     try {
-      if (cartItems.find((item) => Number(item.id) === Number(obj.id))) {
+      if (cartItems.find((item) => Number(item.id) == Number(obj.id))) {
         axios.delete(
           `https://63331bb1573c03ab0b58491b.mockapi.io/cart/${obj.id}`
         )
         setCartItems((prev) =>
-          prev.filter((item) => Number(item.id) !== Number(obj.id))
+          prev.filter((item) => Number(item.id) != Number(obj.id))
         )
       } else {
         axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/cart', obj)
@@ -92,7 +92,9 @@ function App() {
   }
 
   return (
-    <configContext.Provider value={{ items, cartItems, favorite }}>
+    <configContext.Provider
+      value={{ items, cartItems, favorite, setClickCart, setCartItems }}
+    >
       <div className="wrapper">
         {clickCart && (
           <Drawer

@@ -1,9 +1,26 @@
+import React from 'react'
+import Info from './Info'
+import configContext from '../utils/context'
+import axios from 'axios'
+
 function Drawer({ onClose, onRemove, items = [] }) {
+  const { cartItems, setCartItems } = React.useContext(configContext)
+
+  const [isOrderComplete, setIsOrderComplete] = React.useState(false)
+
+  const onClickOrder = async () => {
+    axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/orders', cartItems)
+
+    setIsOrderComplete(true)
+    setCartItems([])
+    await axios.delete('https://63331bb1573c03ab0b58491b.mockapi.io/cart', [])
+  }
+
   return (
     <div className="drawer__overlay">
       <div className="drawer">
         <h2>
-          Корзина{' '}
+          Shopping cart{' '}
           <img
             onClick={onClose}
             className="btnRemove"
@@ -50,15 +67,31 @@ function Drawer({ onClose, onRemove, items = [] }) {
                 <span>1074 руб.</span>
               </li>
             </ul>
-            <button className="green__btn">Оформить заказ</button>
+            <button className="green__btn" onClick={onClickOrder}>
+              Оформить заказ
+            </button>
           </>
         ) : (
-          <div className="cartEmpty">
+          <Info
+            title={isOrderComplete ? 'Order complete' : 'Cart is empty'}
+            description={
+              isOrderComplete
+                ? 'Your order will soon be delivered by courier'
+                : 'Add at least one product to place an order'
+            }
+            textButton="Back to shopping"
+            image={
+              isOrderComplete
+                ? './image/complete_order.png'
+                : './image/empty_cart.png'
+            }
+          />
+          /*<div className="cartEmpty">
             <img
               width={120}
               height={120}
               className="cartEmpty__img"
-              src="./image/empty_cart.png"
+              src={image}
               alt="empty cart"
             />
             <h2 className="cartEmpty_h2">Cart is empty</h2>
@@ -68,7 +101,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
             <button className="green__btn empty_btn" onClick={onClose}>
               Back to shopping
             </button>
-          </div>
+          </div>*/
         )}
       </div>
     </div>
