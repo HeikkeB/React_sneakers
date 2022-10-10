@@ -1,17 +1,16 @@
 import React from 'react'
 import Card from '../components/Card/Card'
-import configContext from '../utils/context'
+//import configContext from '../utils/context'
 import axios from 'axios'
 
 function Orders() {
-  const [orders, setOrders] = React.useState([])
+  //const [orders, setOrders] = React.useState([])
 
   React.useEffect(() => {
     async function fetchData() {
       const { data } = await axios.get(
         'https://63331bb1573c03ab0b58491b.mockapi.io/orders'
       )
-      console.log(data)
     }
 
     fetchData()
@@ -24,9 +23,9 @@ function Orders() {
       </div>
 
       <div className="content__list_favorites">
-        {[].map((el) => (
+        {[].map((el, index) => (
           <Card
-            key={el.id}
+            key={index}
             //handleFavorite={(item) => onAddFavorite(item)}
             //handleAdd={(item) => addToCart(item)}
             //isFavorite={true}

@@ -52,7 +52,7 @@ function Card({
               src={
                 isLiked ? '/image/heart_liked.png' : '/image/heart_unliked.png'
               }
-              alt="unliked"
+              alt="like"
               width={32}
               height={32}
             />

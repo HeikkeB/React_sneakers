@@ -18,17 +18,15 @@ function Home({
     )
     return (
       isLoading ? Array(12).fill(<Card loading={isLoading} />) : itemsRender
-    ).map((el) => (
+    ).map((el, index) => (
       <Card
-        key={el.id}
+        key={index}
         title={el.title}
         price={el.price}
         imageUrl={el.imageUrl}
         handleFavorite={(item) => onAddFavorite(item)}
-        handleAdd={(item) => addToCart(item)}
-        isLikedCart={cartItems.some(
-          (item) => Number(item.id) === Number(el.id)
-        )}
+        handleAdd={(obj) => addToCart(obj)}
+        isLikedCart={cartItems.some((obj) => obj.id === el.id)}
         loading={isLoading}
       />
     ))
@@ -60,8 +58,8 @@ function Home({
         <div className="titleSearch">
           <h1>
             {searchValue
-              ? `Поиск по запросу: "${searchValue}"`
-              : 'Все кроссовки'}
+              ? `Search on the request: "${searchValue}"`
+              : 'All Items'}
           </h1>
           <div className="search-block">
             <img

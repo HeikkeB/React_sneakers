@@ -68,7 +68,7 @@ function Drawer({ onClose, onRemove, items = [] }) {
               </li>
             </ul>
             <button className="green__btn" onClick={onClickOrder}>
-              Оформить заказ
+              Checkout
             </button>
           </>
         ) : (

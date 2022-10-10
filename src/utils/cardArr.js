@@ -1,6 +1,6 @@
 const cardArr = [
   {
-    id: 1,
+    id: '1',
     title: 'Мужские Кроссовки Nike Blazer Mid Suede',
     price: 12999,
     imageUrl: '/image/sneakers/Nike Blazer Mid Suede.jpg',

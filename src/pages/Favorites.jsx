@@ -12,9 +12,9 @@ function Favorites({ onAddFavorite, addToCart }) {
       </div>
 
       <div className="content__list_favorites">
-        {favorite.map((el) => (
+        {favorite.map((el, index) => (
           <Card
-            key={el.id}
+            key={index}
             handleFavorite={(item) => onAddFavorite(item)}
             handleAdd={(item) => addToCart(item)}
             isFavorite={true}
