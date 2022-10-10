@@ -6,6 +6,7 @@ import Drawer from './components/Drawer'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Favorites from './pages/Favorites'
 import configContext from './utils/context'
+import Orders from './pages/Orders'
 //import cardArr from './utils/cardArr'
 
 function App() {
@@ -127,6 +128,8 @@ function App() {
               <Favorites onAddFavorite={onAddFavorite} addToCart={addToCart} />
             }
           ></Route>
+
+          <Route exact path="/orders" element={<Orders />}></Route>
         </Routes>
       </div>
     </configContext.Provider>

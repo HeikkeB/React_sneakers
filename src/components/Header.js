@@ -1,5 +1,9 @@
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { usePriceCart } from '../hooks/usePriceCart'
 function Header(props) {
+  const { priceTotal } = usePriceCart()
+
   return (
     <header>
       <div className="header__left">
@@ -16,9 +20,13 @@ function Header(props) {
             <img width={19.5} height={18} src="image/home.svg" alt="home" />
           </Link>
         </li>
+
         <li>
-          <img width={18} height={18} src="image/user.svg" alt="user" />
+          <Link exact="true" to="/orders">
+            <img width={18} height={18} src="image/user.svg" alt="user" />
+          </Link>
         </li>
+
         <li>
           <Link exact="true" to="/favorites">
             <img
@@ -37,7 +45,7 @@ function Header(props) {
             src="image/shopping_bag.svg"
             alt="basket"
           />
-          <span>1205 руб.</span>
+          <span>{priceTotal} руб.</span>
         </li>
       </ul>
     </header>

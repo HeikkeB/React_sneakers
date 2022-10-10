@@ -1,10 +1,10 @@
 import React from 'react'
 import Info from './Info'
-import configContext from '../utils/context'
 import axios from 'axios'
+import { usePriceCart } from '../hooks/usePriceCart'
 
 function Drawer({ onClose, onRemove, items = [] }) {
-  const { cartItems, setCartItems } = React.useContext(configContext)
+  const { cartItems, setCartItems, priceTotal } = usePriceCart()
 
   const [isOrderComplete, setIsOrderComplete] = React.useState(false)
 
@@ -59,12 +59,12 @@ function Drawer({ onClose, onRemove, items = [] }) {
               <li className="priceList__string">
                 <h3>Итого:</h3>
                 <div></div>
-                <span>21 499 руб.</span>
+                <span>{priceTotal} руб.</span>
               </li>
               <li className="priceList__string">
                 <h3>Налог 5%:</h3>
                 <div></div>
-                <span>1074 руб.</span>
+                <span>{Math.round((priceTotal / 100) * 5)} руб.</span>
               </li>
             </ul>
             <button className="green__btn" onClick={onClickOrder}>

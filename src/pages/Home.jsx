@@ -20,7 +20,7 @@ function Home({
       isLoading ? Array(12).fill(<Card loading={isLoading} />) : itemsRender
     ).map((el) => (
       <Card
-        key={el.title}
+        key={el.id}
         title={el.title}
         price={el.price}
         imageUrl={el.imageUrl}
