@@ -4,16 +4,14 @@ import Card from '../components/Card/Card'
 import axios from 'axios'
 
 function Orders() {
-  //const [orders, setOrders] = React.useState([])
+  const [orders, setOrders] = React.useState([])
 
   React.useEffect(() => {
-    async function fetchData() {
+    ;(async () => {
       const { data } = await axios.get(
         'https://63331bb1573c03ab0b58491b.mockapi.io/orders'
       )
-    }
-
-    fetchData()
+    })()
   }, [])
 
   return (

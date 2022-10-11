@@ -1,8 +1,8 @@
 import Card from '../components/Card/Card'
 import React from 'react'
-import configContext from '../utils/context'
 
 function Home({
+  items,
   searchValue,
   onChangeSearchInput,
   onClearSearchInput,
@@ -10,8 +10,6 @@ function Home({
   addToCart,
   isLoading,
 }) {
-  const { items, cartItems } = React.useContext(configContext)
-
   const renderItems = () => {
     const itemsRender = items.filter((el) =>
       el.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -26,7 +24,7 @@ function Home({
         imageUrl={el.imageUrl}
         handleFavorite={(item) => onAddFavorite(item)}
         handleAdd={(obj) => addToCart(obj)}
-        isLikedCart={cartItems.some((obj) => obj.id === el.id)}
+        //isLikedCart={isItemAdded(el && el.id)}
         loading={isLoading}
       />
     ))

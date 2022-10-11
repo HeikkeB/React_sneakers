@@ -62,16 +62,22 @@ function App() {
     fetchData()*/
   }, [])
 
-  const addToCart = (obj) => {
+  const addToCart = async (item) => {
     try {
-      if (cartItems.find((item) => item.id === obj.id)) {
-        axios.delete(
-          `https://63331bb1573c03ab0b58491b.mockapi.io/cart/${obj.id}`
+      const findItem = cartItems.find((cartItem) => cartItem.id === item.id)
+      if (findItem) {
+        setCartItems((prev) =>
+          prev.filter((cartItem) => cartItem.id !== item.id)
         )
-        setCartItems((prev) => prev.filter((item) => item.id !== obj.id))
+        await axios.delete(
+          `https://63331bb1573c03ab0b58491b.mockapi.io/cart/${findItem.id}`
+        )
       } else {
-        axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/cart', obj)
-        setCartItems((prev) => [...prev, obj])
+        const { data } = await axios.post(
+          'https://63331bb1573c03ab0b58491b.mockapi.io/cart',
+          item
+        )
+        setCartItems((prev) => [...prev, data])
       }
     } catch (err) {
       console.log(err)
@@ -110,9 +116,20 @@ function App() {
     }
   }
 
+  const isItemAdded = (id) => {
+    return cartItems.some((item) => item.id === id)
+  }
+
   return (
     <configContext.Provider
-      value={{ items, cartItems, favorite, setClickCart, setCartItems }}
+      value={{
+        items,
+        cartItems,
+        favorite,
+        setClickCart,
+        setCartItems,
+        isItemAdded,
+      }}
     >
       <div className="wrapper">
         {clickCart && (
@@ -130,6 +147,7 @@ function App() {
             path="/"
             element={
               <Home
+                items={items}
                 searchValue={searchValue}
                 onChangeSearchInput={onChangeSearchInput}
                 onClearSearchInput={onClearSearchInput}

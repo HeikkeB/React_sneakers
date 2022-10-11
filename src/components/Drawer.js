@@ -9,11 +9,17 @@ function Drawer({ onClose, onRemove, items = [] }) {
   const [isOrderComplete, setIsOrderComplete] = React.useState(false)
 
   const onClickOrder = async () => {
-    axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/orders', cartItems)
+    try {
+      axios.post('https://63331bb1573c03ab0b58491b.mockapi.io/orders', {
+        items: cartItems,
+      })
 
-    setIsOrderComplete(true)
-    setCartItems([])
-    await axios.delete('https://63331bb1573c03ab0b58491b.mockapi.io/cart', [])
+      setIsOrderComplete(true)
+      setCartItems([])
+      await axios.delete('https://63331bb1573c03ab0b58491b.mockapi.io/cart', [])
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (

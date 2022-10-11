@@ -1,6 +1,7 @@
 import styles from './Card.module.scss'
 import React from 'react'
 import ContentLoader from 'react-content-loader'
+import configContext from '../../utils/context'
 
 function Card({
   id,
@@ -10,14 +11,14 @@ function Card({
   title,
   price,
   isFavorite = false,
-  isLikedCart = false,
   loading = false,
 }) {
-  const [isAdded, setIsAdded] = React.useState(isLikedCart)
+  const { isItemAdded } = React.useContext(configContext)
+  //const [isAdded, setIsAdded] = React.useState(isItemAdded)
 
   const handleBtnAdd = () => {
     handleAdd({ id, imageUrl, title, price })
-    setIsAdded(!isAdded)
+    //setIsAdded(!isAdded)
   }
 
   const [isLiked, setIsLiked] = React.useState(isFavorite)
@@ -74,7 +75,9 @@ function Card({
             <img
               className={styles.button_plus}
               onClick={handleBtnAdd}
-              src={isAdded ? '/image/btn_checked.svg' : '/image/plus.svg'}
+              src={
+                isItemAdded(id) ? '/image/btn_checked.svg' : '/image/plus.svg'
+              }
               alt="plus"
               width={32}
               height={32}
